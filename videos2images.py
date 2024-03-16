@@ -38,25 +38,21 @@ def gen_image(video_folder, image_folder):
     video_file_path = video_folder
     video_file_list = [f for f in listdir(video_file_path) if isfile(join(video_file_path, f))]
     output_file_path = image_folder
-
     for video_file in video_file_list:
         video_path = video_file_path + video_file
         video_number = int(video_file.split(".")[0])
         cap = cv2.VideoCapture(video_path)
         idx = 0
-        frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-        
-        with tqdm(total=frame_count, desc=f'Processing video {video_number}') as pbar:
-            while (cap.isOpened()):
-                ret, frame = cap.read()
-                idx += 1
-                frame_name = str(video_number) + "_" + str(idx)
-                if ret == True:
-                    image_name = output_file_path + frame_name + ".jpg"
-                    cv2.imwrite(image_name, frame)
-                    pbar.update(1)
-                else:
-                    break
+        while (cap.isOpened()):
+            ret, frame = cap.read()
+            idx += 1
+            frame_name = str(video_number) + "_" + str(idx)
+            if ret == True:
+                print(output_file_path + frame_name + ".jpg")
+                image_name = output_file_path + frame_name + ".jpg"
+                cv2.imwrite(image_name, frame)
+            else:
+                break
         cap.release()
         
 def parse_opt():
