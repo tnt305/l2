@@ -538,8 +538,8 @@ class AICityPseudoTestset(Dataset):
             VerticalFlip(p=0.5),
             ToGray(p=0.01),
             OneOf([
-                IAAAdditiveGaussianNoise(),
-                GaussNoise(),
+                A.IAAAdditiveGaussianNoise(),
+                A.GaussNoise(),
             ], p=0.2),
             OneOf([
                 MotionBlur(p=0.2),
