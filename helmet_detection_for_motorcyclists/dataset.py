@@ -78,8 +78,8 @@ class AICityTrainDataset(Dataset):
             VerticalFlip(p=0.5),
             ToGray(p=0.01),
             OneOf([
-                A.IAAAdditiveGaussianNoise(),
-                A.GaussNoise(),
+                A.GaussNoise(p =0.6),
+                A.GaussNoise(p=0.4),
             ], p=0.2),
             OneOf([
                 MotionBlur(p=0.2),
@@ -301,8 +301,8 @@ class AICityDataset(Dataset):
             VerticalFlip(p=0.5),
             ToGray(p=0.01),
             OneOf([
-                A.IAAAdditiveGaussianNoise(),
-                A.GaussianNoise(),
+                A.GaussNoise(p =0.6),
+                A.GaussianNoise(p= 0.4),
             ], p=0.2),
             OneOf([
                 MotionBlur(p=0.2),
@@ -539,8 +539,8 @@ class AICityPseudoTestset(Dataset):
             VerticalFlip(p=0.5),
             ToGray(p=0.01),
             OneOf([
-                A.IAAAdditiveGaussianNoise(),
-                A.GaussNoise(),
+                A.GaussNoise(p =0.6),
+                A.GaussNoise(p=0.4),
             ], p=0.2),
             OneOf([
                 MotionBlur(p=0.2),
