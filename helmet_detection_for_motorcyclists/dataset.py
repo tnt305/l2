@@ -89,7 +89,7 @@ class AICityTrainDataset(Dataset):
             OneOf([
                 CLAHE(),
                 Sharpen(),
-                IAAEmboss(),
+                Emboss(),
                 RandomBrightnessContrast(),
             ], p=0.25),
             HueSaturationValue(p=0.25)
@@ -312,7 +312,7 @@ class AICityDataset(Dataset):
             OneOf([
                 CLAHE(),
                 Sharpen(),
-                IAAEmboss(),
+                Emboss(),
                 RandomBrightnessContrast(),
             ], p=0.25),
             HueSaturationValue(p=0.25)
@@ -550,7 +550,7 @@ class AICityPseudoTestset(Dataset):
             OneOf([
                 CLAHE(),
                 Sharpen(),
-                IAAEmboss(),
+                Emboss(),
                 RandomBrightnessContrast(),
             ], p=0.25),
             HueSaturationValue(p=0.25)
