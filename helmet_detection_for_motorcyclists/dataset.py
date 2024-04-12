@@ -7,6 +7,7 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset
 import torch.nn.functional as F
+import albumentations as A
 from albumentations import *
 from os import listdir
 from os.path import isfile, join
@@ -77,8 +78,8 @@ class AICityTrainDataset(Dataset):
             VerticalFlip(p=0.5),
             ToGray(p=0.01),
             OneOf([
-                IAAAdditiveGaussianNoise(),
-                GaussNoise(),
+                A.GaussNoise(p =0.6),
+                A.GaussNoise(p=0.4),
             ], p=0.2),
             OneOf([
                 MotionBlur(p=0.2),
@@ -87,8 +88,8 @@ class AICityTrainDataset(Dataset):
             ], p=0.2),
             OneOf([
                 CLAHE(),
-                IAASharpen(),
-                IAAEmboss(),
+                Sharpen(),
+                Emboss(),
                 RandomBrightnessContrast(),
             ], p=0.25),
             HueSaturationValue(p=0.25)
@@ -288,7 +289,7 @@ class AICityDataset(Dataset):
         self.df = df
         self.image_ids = list(np.unique(self.df.image_id.values))
         self.img_size = img_size
-        self.root_dir = '../aicity_dataset/aicity2023_track5_images'
+        self.root_dir = '/kaggle/working/aicity2024/aicity2024_track5_images'
         assert mode in  ['train', 'valid']
         self.mode = mode
         self.network = network
@@ -300,8 +301,8 @@ class AICityDataset(Dataset):
             VerticalFlip(p=0.5),
             ToGray(p=0.01),
             OneOf([
-                IAAAdditiveGaussianNoise(),
-                GaussNoise(),
+                A.GaussNoise(p =0.6),
+                A.GaussNoise(p= 0.4),
             ], p=0.2),
             OneOf([
                 MotionBlur(p=0.2),
@@ -310,8 +311,8 @@ class AICityDataset(Dataset):
             ], p=0.2),
             OneOf([
                 CLAHE(),
-                IAASharpen(),
-                IAAEmboss(),
+                Sharpen(),
+                Emboss(),
                 RandomBrightnessContrast(),
             ], p=0.25),
             HueSaturationValue(p=0.25)
@@ -538,8 +539,8 @@ class AICityPseudoTestset(Dataset):
             VerticalFlip(p=0.5),
             ToGray(p=0.01),
             OneOf([
-                IAAAdditiveGaussianNoise(),
-                GaussNoise(),
+                A.GaussNoise(p =0.6),
+                A.GaussNoise(p=0.4),
             ], p=0.2),
             OneOf([
                 MotionBlur(p=0.2),
@@ -548,8 +549,8 @@ class AICityPseudoTestset(Dataset):
             ], p=0.2),
             OneOf([
                 CLAHE(),
-                IAASharpen(),
-                IAAEmboss(),
+                Sharpen(),
+                Emboss(),
                 RandomBrightnessContrast(),
             ], p=0.25),
             HueSaturationValue(p=0.25)
