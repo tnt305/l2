@@ -48,14 +48,14 @@ effdet_ed7_1024_box_pred = load_dict('pkl/effdet_ed7_1024_box_pred.pkl')
 effdet_ed7_1024_score_pred = load_dict('pkl/effdet_ed7_1024_score_pred.pkl')
 effdet_ed7_1024_label_pred = load_dict('pkl/effdet_ed7_1024_label_pred.pkl')
 
-df = '../aicity_dataset/aicity2023_track5_images/'
+df = '../aicity2024/aicity2024_track5_images/'
 image_file_list = [f for f in listdir(df) if isfile(join(df, f))]
 image_ids = []
 for id in image_file_list:
     image_ids.append(id.split(".")[0])
 
-TEST_DIR = '../aicity_dataset/aicity2023_track5_test_images'
-TRAIN_DIR = '../aicity_dataset/aicity2023_track5_images'
+TEST_DIR = '../aicity2024/aicity2024_track5_test_images'
+TRAIN_DIR = '../aicity2024/aicity2024_track5_images'
 
 output_dict = run_wbf_4preds(image_ids,
                          effdet_ed7_896_box_pred, effdet_ed7_896_score_pred, effdet_ed7_896_label_pred,
