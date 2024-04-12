@@ -302,7 +302,7 @@ class AICityDataset(Dataset):
             ToGray(p=0.01),
             OneOf([
                 A.GaussNoise(p =0.6),
-                A.GaussianNoise(p= 0.4),
+                A.GaussNoise(p= 0.4),
             ], p=0.2),
             OneOf([
                 MotionBlur(p=0.2),
