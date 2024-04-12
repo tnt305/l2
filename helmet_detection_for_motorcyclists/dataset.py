@@ -88,7 +88,7 @@ class AICityTrainDataset(Dataset):
             ], p=0.2),
             OneOf([
                 CLAHE(),
-                IAASharpen(),
+                Sharpen(),
                 IAAEmboss(),
                 RandomBrightnessContrast(),
             ], p=0.25),
@@ -311,7 +311,7 @@ class AICityDataset(Dataset):
             ], p=0.2),
             OneOf([
                 CLAHE(),
-                IAASharpen(),
+                Sharpen(),
                 IAAEmboss(),
                 RandomBrightnessContrast(),
             ], p=0.25),
@@ -549,7 +549,7 @@ class AICityPseudoTestset(Dataset):
             ], p=0.2),
             OneOf([
                 CLAHE(),
-                IAASharpen(),
+                Sharpen(),
                 IAAEmboss(),
                 RandomBrightnessContrast(),
             ], p=0.25),
