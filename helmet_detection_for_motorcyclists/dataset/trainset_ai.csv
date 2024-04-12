@@ -1,4 +1,4 @@
-image_id,fold,x_min,y_min,x_max,y_max,isbox,source,label
+image_id,fold,xmin,ymin,xmax,ymax,isbox,source,label
 1_1,1,1539.0,0.0,1624.0,48.0,True,1,1
 1_2,1,1499.0,0.0,1629.0,76.0,True,1,1
 1_3,1,1451.0,0.0,1654.0,93.0,True,1,1
