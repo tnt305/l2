@@ -7,6 +7,7 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset
 import torch.nn.functional as F
+import albumentations as A
 from albumentations import *
 from os import listdir
 from os.path import isfile, join
@@ -77,8 +78,8 @@ class AICityTrainDataset(Dataset):
             VerticalFlip(p=0.5),
             ToGray(p=0.01),
             OneOf([
-                IAAAdditiveGaussianNoise(),
-                GaussNoise(),
+                A.IAAAdditiveGaussianNoise(),
+                A.GaussNoise(),
             ], p=0.2),
             OneOf([
                 MotionBlur(p=0.2),
@@ -300,8 +301,8 @@ class AICityDataset(Dataset):
             VerticalFlip(p=0.5),
             ToGray(p=0.01),
             OneOf([
-                IAAAdditiveGaussianNoise(),
-                GaussNoise(),
+                A.IAAAdditiveGaussianNoise(),
+                A.GaussNoise(),
             ], p=0.2),
             OneOf([
                 MotionBlur(p=0.2),
