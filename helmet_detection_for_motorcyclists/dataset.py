@@ -79,7 +79,7 @@ class AICityTrainDataset(Dataset):
             ToGray(p=0.01),
             OneOf([
                 A.IAAAdditiveGaussianNoise(),
-                A.GaussNoise(),
+                A.GaussianNoise(),
             ], p=0.2),
             OneOf([
                 MotionBlur(p=0.2),
@@ -302,7 +302,7 @@ class AICityDataset(Dataset):
             ToGray(p=0.01),
             OneOf([
                 A.IAAAdditiveGaussianNoise(),
-                A.GaussNoise(),
+                A.GaussianNoise(),
             ], p=0.2),
             OneOf([
                 MotionBlur(p=0.2),
