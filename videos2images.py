@@ -57,9 +57,9 @@ def gen_image(video_folder, image_folder):
         
 def parse_opt():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--video_folder', default='./aicity_dataset/aicity2023_track5/videos/', \
+    parser.add_argument('--video_folder', default='./aicity2024/aicity2024_track5_train/videos', \
                         required=False ,help='path to aicity challenge videos folder')
-    parser.add_argument('--save_folder', default='./aicity_dataset/aicity2023_track5_images/', \
+    parser.add_argument('--save_folder', default='./aicity2024/aicity2024_track5_images/', \
                         required=False ,help='path to save images')
     # parser.add_argument()
     args = parser.parse_args()

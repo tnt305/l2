@@ -7,7 +7,7 @@ from os.path import isfile, join
 from ensemble_boxes import weighted_boxes_fusion
 from utils import load_dict
 
-AICITY_CLASSES = ['motorbike', 'DHelmet', 'DNoHelmet', 'P1Helmet', 'P1NoHelmet', 'P2Helmet', 'P2NoHelmet']
+AICITY_CLASSES = ['motorbike', 'DHelmet', 'DNoHelmet', 'P1Helmet', 'P1NoHelmet', 'P2Helmet', 'P2NoHelmet', 'P0Helmet', 'P0NoHelmet']
 HEAD_CLASSES = ['head', 'helmet', 'uncertain']
 colors = [[random.randint(0, 255) for _ in range(3)] for _ in range(8)]
 

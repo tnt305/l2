@@ -140,3 +140,36 @@ def make_pseudo_dataframe(image_ids, output_dict, TEST_DIR, df, TRAIN_DIR, PSEUD
     train_df = pd.concat([train_df, pseudo_df], ignore_index=True).sample(frac=1).reset_index(drop=True)
     train_df.to_csv('train.csv', index=False)
     valid_df.to_csv('valid.csv', index=False)
+
+
+    def create_dataset(gt_filepath, head=False):
+        with open(gt_filepath, 'r') as text_file:
+            lines = text_file.readlines()
+
+        data = [line.strip().split(',') for line in lines]
+
+        with open('gt.csv', 'w', newline='') as csv_file:
+            writer = csv.writer(csv_file)
+            writer.writerows(data)
+
+        df = pd.read_csv('gt.csv', names=['video_id', 'frame', 'bb_left', 'bb_top', 'bb_width', 'bb_height', 'class'])
+
+        train_dataset = pd.DataFrame(columns=['image_id', 'folds', 'x_min', 'y_min', 'x_max', 'y_max', 'isbox', 'source', 'label'])
+
+        train_dataset['image_id'] = df['video_id'].astype(str) + '_' + df['frame'].astype(str)
+        train_dataset['folds'] = df['video_id'] % 5
+        train_dataset['x_min'] = df['bb_left'].astype(float)
+        train_dataset['y_min'] = df['bb_top'].astype(float)
+        train_dataset['x_max'] = (df['bb_left'] + df['bb_width']).astype(float)
+        train_dataset['y_max'] = (df['bb_top'] + df['bb_height']).astype(float)
+        train_dataset['isbox'] = True
+        if head == False:
+            train_dataset['source'] = df['class']
+        else:
+            train_dataset['source'] = 0
+
+        train_dataset['label'] = df['class']
+        train_dataset = train_dataset.drop(train_dataset.columns[:7], axis=1)
+
+        filename = 'trainset_ai.csv' if head == False else 'trainset_head.csv'
+        train_dataset.to_csv(filename, index=False)
