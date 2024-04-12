@@ -19,7 +19,7 @@ from models import get_effdet, get_effdet_train
 from warmup_scheduler import GradualWarmupScheduler
 from dataset import AICityDataset
 
-os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:512"
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:1024"
 
 ## uncomment to train with more workers
 import resource
