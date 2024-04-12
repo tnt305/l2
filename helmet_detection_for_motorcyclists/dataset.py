@@ -289,7 +289,7 @@ class AICityDataset(Dataset):
         self.df = df
         self.image_ids = list(np.unique(self.df.image_id.values))
         self.img_size = img_size
-        self.root_dir = '../aicity_dataset/aicity2023_track5_images'
+        self.root_dir = '/kaggle/working/aicity2024/aicity2024_track5_images'
         assert mode in  ['train', 'valid']
         self.mode = mode
         self.network = network
