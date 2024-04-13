@@ -207,13 +207,14 @@ class Match(object):
                 The shape of the gathered tensor is [match_results.shape[0]] + input_tensor.shape[1:].
         """
         device = torch.device("cuda")
-        # Create ss tensor with the same shape as input_tensor, but filled with ignored_value
-        ss = torch.full_like(input_tensor, ignored_value).to(device)
+        # Create ss tensor with the same shape as input_tensor, filled with ignored_value
+        ss = torch.full(input_tensor.shape[1:], ignored_value, device=device)
         # Concatenate ss and input_tensor along the first dimension
-        input_tensor = torch.cat([ss, input_tensor], dim=0).to(device)
+        input_tensor = torch.cat([ss.unsqueeze(0), input_tensor], dim=0)
         gather_indices = torch.clamp(self.match_results + 1, min=0).to(device)
         gathered_tensor = torch.index_select(input_tensor, 0, gather_indices)
         return gathered_tensor
+
 
 
 
