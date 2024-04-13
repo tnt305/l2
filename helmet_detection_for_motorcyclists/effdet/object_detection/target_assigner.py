@@ -172,7 +172,7 @@ class TargetAssigner(object):
         matched_reg_targets = self._box_coder.encode(matched_gt_boxlist, anchors)
 
         # Add to device
-        unmatched_ignored_reg_targets = self._default_regression_target(device).repeat(match.match_results.shape[0], 1).to(device)
+        unmatched_ignored_reg_targets = self._default_regression_target(device).repeat(match.match_results.shape[0], 1) #.to(device)
         matched_anchors_mask = match.matched_column_indicator().to(device)
         reg_targets = torch.where(matched_anchors_mask.unsqueeze(1), matched_reg_targets, unmatched_ignored_reg_targets)
 
