@@ -171,11 +171,10 @@ class TargetAssigner(object):
             matched_gt_boxlist.add_field(KEYPOINTS_FIELD_NAME, matched_keypoints)
         matched_reg_targets = self._box_coder.encode(matched_gt_boxlist, anchors)
 
-        # Add to device
-        unmatched_ignored_reg_targets = self._default_regression_target(device).repeat(match.match_results.shape[0], 1) #.to(device)
-        matched_anchors_mask = match.matched_column_indicator().to(device)
-        reg_targets = torch.where(matched_anchors_mask.unsqueeze(1), matched_reg_targets, unmatched_ignored_reg_targets)
+        unmatched_ignored_reg_targets = self._default_regression_target(device).repeat(match.match_results.shape[0], 1)
 
+        matched_anchors_mask = match.matched_column_indicator()
+        reg_targets = torch.where(matched_anchors_mask.unsqueeze(1), matched_reg_targets, unmatched_ignored_reg_targets)
         return reg_targets
 
     def _default_regression_target(self, device):
