@@ -188,6 +188,7 @@ class Match(object):
         gathered_tensor = torch.index_select(input_tensor, 0, gather_indices)
         return gathered_tensor
 
+
 class Matcher(object):
     """Abstract base class for matcher.
     """
