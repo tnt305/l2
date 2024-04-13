@@ -147,7 +147,7 @@ if __name__ == "__main__":
         LOG = 'logs/effdet_{}_{}_fold{}.csv'.format(args.backbone, args.img_size, fold)
 
         if args.resume:
-            model = get_effdet_train(args.backbone, num_classes=7, img_size=args.img_size)
+            model = get_effdet_train(args.backbone, num_classes= 9, img_size=args.img_size)
             model = model.cuda()
             args.init_lr, epoch = get_resume_lr(LOG)
             args.epochs = 100 - epoch
@@ -172,7 +172,7 @@ if __name__ == "__main__":
             scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lf)
             scheduler.last_epoch = 0
         else:
-            model = get_effdet(args.backbone, num_classes=7, img_size=args.img_size)
+            model = get_effdet(args.backbone, num_classes= , img_size=args.img_size)
             model = model.cuda()
             optimizer = torch.optim.Adam(model.parameters(), lr=args.init_lr/args.warmup_factor)
             scheduler_cosine = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, args.epochs-1)
