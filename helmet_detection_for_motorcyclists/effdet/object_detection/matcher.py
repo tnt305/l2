@@ -201,6 +201,8 @@ class Match(object):
                 unmatched_tensor,
                 input_tensor], dim=0)
         gather_indices = torch.clamp(self.match_results + 2, min=0)
+        gather_indices = gather_indices.to(input_tensor.device)
+        # Perform the index select operation
         gathered_tensor = torch.index_select(input_tensor, 0, gather_indices)
         return gathered_tensor
 
