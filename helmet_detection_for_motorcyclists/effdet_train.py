@@ -231,7 +231,7 @@ if __name__ == "__main__":
                     loss_hist.update(loss.detach().item(), images.size(0))
                     optimizer.step()
                 loop.set_description('Epoch {:03d}/{:03d} | LR: {:.5f}'.format(epoch, args.epochs-1, optimizer.param_groups[0]['lr']))
-                loop.set_postfix(loss=loss_hist.avg)
+                loop.set_postfix(loss="{:.6f}".format(loss_hist.avg))
             train_loss = loss_hist.avg
 
             model.eval()
