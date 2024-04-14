@@ -187,8 +187,8 @@ class Match(object):
         # gather_indices = torch.clamp(self.match_results + 2, min=0).to(device)
         # gathered_tensor = torch.index_select(input_tensor, 0, gather_indices)
         # return gathered_tensor
-        ss = torch.stack([ignored_value.unsqueeze(0), unmatched_value.unsqueeze(0)]).to(device)
-        input_tensor = torch.cat([ss, input_tensor.unsqueeze(0)], dim=0)
+        ss = torch.stack([ignored_value, unmatched_value]).to(device)
+        input_tensor = torch.cat([ss.unsqueeze(0), input_tensor], dim=0)
         gather_indices = torch.clamp(self.match_results + 2, min=0).to(device)
         gathered_tensor = torch.index_select(input_tensor, 0, gather_indices)
         return gathered_tensor
