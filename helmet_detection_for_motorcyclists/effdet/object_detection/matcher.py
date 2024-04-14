@@ -194,7 +194,7 @@ class Match(object):
             input_tensor = torch.cat([
                 torch.tensor([ignored_value, unmatched_value], dtype=input_tensor.dtype, device=input_tensor.device),
                 input_tensor], dim=0)
-        gather_indices = torch.clamp(self.match_results + 2, min=0)
+        gather_indices = torch.clamp(self.match_results + 1, min=0)
         gathered_tensor = torch.index_select(input_tensor, 0, gather_indices)
         return gathered_tensor
 
