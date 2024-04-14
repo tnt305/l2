@@ -187,20 +187,19 @@ class Match(object):
         # gather_indices = torch.clamp(self.match_results + 2, min=0).to(device)
         # gathered_tensor = torch.index_select(input_tensor, 0, gather_indices)
         # return gathered_tensor
-        input_tensor = input_tensor.flatten()
         if isinstance(ignored_value, torch.Tensor):
             ignored_tensor = ignored_value.unsqueeze(0)  # Ensure same number of dimensions
             unmatched_tensor = unmatched_value.unsqueeze(0)  # Ensure same number of dimensions
-            input_tensor = torch.cat([ignored_tensor, unmatched_tensor, input_tensor], dim=0)
+            input_tensor = torch.cat([ignored_tensor.flatten(), unmatched_tensor.flatten(), input_tensor.flatten()], dim=0)
         else:
             # Scalars
             ignored_tensor = torch.full_like(unmatched_value, ignored_value)
             ignored_tensor = ignored_tensor.unsqueeze(0)  # Ensure same number of dimensions
             unmatched_tensor = torch.tensor([unmatched_value], dtype=input_tensor.dtype, device=input_tensor.device)
             input_tensor = torch.cat([
-                ignored_tensor,
-                unmatched_tensor,
-                input_tensor], dim=0)
+                ignored_tensor.flatten(),
+                unmatched_tensor.flatten(),
+                input_tensor.flatten()], dim=0)
         gather_indices = torch.clamp(self.match_results + 2, min=0)
         gather_indices = gather_indices.to(input_tensor.device)
         # Perform the index select operation
