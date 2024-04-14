@@ -190,7 +190,7 @@ class Match(object):
         if isinstance(ignored_value, torch.Tensor):
             ignored_tensor = ignored_value.unsqueeze(0)  # Ensure same number of dimensions
             unmatched_tensor = unmatched_value.unsqueeze(0)  # Ensure same number of dimensions
-            input_tensor = torch.cat([ignored_tensor, unmatched_tensor.flatten(), input_tensor.flatten()], dim=0)
+            input_tensor = torch.cat([ignored_tensor, unmatched_tensor, input_tensor.flatten()], dim=0)
         else:
             # Scalars
             ignored_tensor = torch.full_like(unmatched_value, ignored_value)
@@ -198,7 +198,7 @@ class Match(object):
             unmatched_tensor = torch.tensor([unmatched_value], dtype=input_tensor.dtype, device=input_tensor.device)
             input_tensor = torch.cat([
                 ignored_tensor,
-                unmatched_tensor.flatten(),
+                unmatched_tensor,
                 input_tensor.flatten()], dim=0)
         gather_indices = torch.clamp(self.match_results + 2, min=0)
         gather_indices = gather_indices.to(input_tensor.device)
