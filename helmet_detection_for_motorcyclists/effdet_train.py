@@ -188,7 +188,7 @@ if __name__ == "__main__":
         pat = 0
 
         loss_hist = AverageMeter()
-        for epoch in tqdm(range(args.epochs)):
+        for epoch in range(args.epochs):
             scheduler.step(epoch)
             loss_hist.reset()
             model.train()
