@@ -189,7 +189,6 @@ class Match(object):
         # return gathered_tensor
         input_tensor = input_tensor.flatten()
         unmatched_value = unmatched_value.flatten()
-        ignored_value =ignored_value.flatten()
         if isinstance(ignored_value, torch.Tensor):
             ignored_tensor = ignored_value.unsqueeze(0)  # Ensure same number of dimensions
             unmatched_tensor = unmatched_value.unsqueeze(0)  # Ensure same number of dimensions
