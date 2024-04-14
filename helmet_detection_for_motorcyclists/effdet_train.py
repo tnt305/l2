@@ -238,8 +238,32 @@ if __name__ == "__main__":
             loss_hist.reset()
             for images, targets in tqdm(valid_loader):
                 images = torch.stack(images).cuda()
-                boxes = [target['boxes'].cuda().float() for target in targets]
-                labels = [target['labels'].cuda().float() for target in targets]
+                batch_boxes = []
+                batch_labels = []
+                
+                # Iterate over targets in the batch
+                for target in targets:
+                    # Extract boxes and labels for this target
+                    box_tensor = target['boxes'].cuda().float()
+                    label_tensor = target['labels'].cuda().float()
+                    
+                    # Reshape box_tensor to [num_boxes, 4] if needed
+                    if len(box_tensor.shape) == 1:
+                        box_tensor = box_tensor.unsqueeze(0)
+                    
+                    # Append boxes and labels to batch lists
+                    batch_boxes.append(box_tensor)
+                    batch_labels.append(label_tensor)
+                
+                # Stack boxes and labels for the entire batch
+                if len(batch_boxes) > 0:
+                    boxes = torch.cat(batch_boxes, dim=0)
+                    labels = torch.cat(batch_labels, dim=0)
+                else:
+                    # Handle empty batch case
+                    continue
+                # boxes = [target['boxes'].cuda().float() for target in targets]
+                # labels = [target['labels'].cuda().float() for target in targets]
 
                 with torch.set_grad_enabled(False):
                     loss, _, _ = model(images, boxes, labels)
