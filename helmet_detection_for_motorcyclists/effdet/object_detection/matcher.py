@@ -183,6 +183,7 @@ class Match(object):
         """
         device = torch.device("cuda")
         ss = torch.stack([ignored_value, unmatched_value], dim =0).to(device)
+        print('ss and input tensor',ss, input_tensor)
         input_tensor = torch.cat([ss, input_tensor], dim=0).to(device)
         gather_indices = torch.clamp(self.match_results + 2, min=0).to(device)
         gathered_tensor = torch.index_select(input_tensor, 0, gather_indices)
