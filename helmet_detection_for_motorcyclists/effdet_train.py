@@ -223,7 +223,7 @@ if __name__ == "__main__":
                 labels = [target['labels'].cuda().float() for target in targets]
 
                 optimizer.zero_grad()
-                with torch.set_grad_enabled(True):
+                with torch.set_grad_enabled(False):
                     loss, _, _ = model(images, boxes, labels)
                     if loss == 0 or not torch.isfinite(loss):
                         continue
