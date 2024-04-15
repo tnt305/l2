@@ -223,7 +223,7 @@ if __name__ == "__main__":
                 labels = [target['labels'].cuda().float() for target in targets]
 
                 optimizer.zero_grad()
-                with torch.set_grad_enabled(False):
+                with torch.set_grad_enabled(True):
                     loss, _, _ = model(images, boxes, labels)
                     if loss == 0 or not torch.isfinite(loss):
                         continue
@@ -243,6 +243,7 @@ if __name__ == "__main__":
 
                 #with torch.set_grad_enabled(False):
                 with torch.no_grad():
+                    print("check_point", model(images, boxes, labels))
                     loss, _, _ = model(images, boxes, labels)
                     loss_hist.update(loss.detach().item(), images.size(0))
             val_loss = loss_hist.avg
