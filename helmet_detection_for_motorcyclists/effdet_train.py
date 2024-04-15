@@ -243,7 +243,6 @@ if __name__ == "__main__":
 
                 #with torch.set_grad_enabled(False):
                 with torch.no_grad():
-                    print("check_point", model(images, boxes, labels))
                     loss, _, _ = model(images, boxes, labels)
                     loss_hist.update(loss.detach().item(), images.size(0))
             val_loss = loss_hist.avg
